@@ -22,7 +22,7 @@ This guide walks through launching an AWS EC2 instance, performing ping tests, l
 1. Once the instance is running, go to the **Instances** section.
 2. Locate your instance and find the **Public IPv4 Address** under the description tab.
    - Public IP: **3.88.186.47**
-   ![Screenshot 5](screenshot-5.png)
+   ![Screenshot 5](screenshot-1.png)
 
 ## Step 4: Ping the EC2 Instance from Kali Linux
 1. Verify the instance is running and has a public IP.
