@@ -1,0 +1,100 @@
+1. Log in to AWS Management Console
+   Open a browser and go to AWS Management Console.
+   Sign in with your credentials.
+2. Navigate to EC2 Dashboard
+   In the AWS Management Console, search for EC2 in the search bar.
+   Click on EC2 under the "Services" section to open the EC2 dashboard.
+3. Launch a New EC2 Instance (VM)
+   In the EC2 dashboard, click on Launch Instance.
+   Select an Amazon Machine Image (AMI) (e.g., Amazon Linux, Ubuntu).
+
+(sreenshot-2.png)
+
+   Choose an Instance Type (e.g., t2.micro for free tier).
+
+(screenshot-3.png)
+   Configure the instance details, such as VPC and subnet (you can leave defaults for basic setups).
+   Add storage if necessary (by default, 8GB is sufficient).
+   Configure security group settings:
+   Add a rule for SSH (port 22) to allow access from your IP.
+   add a rule for ALL ICMP-IPv4 to allow all ipv4 access from your ip
+
+(screenshot-4.png)
+ 
+  Add a rule for ICMP (ping) to allow testing with ping.
+  Click Review and Launch.
+4. Launch the Instance
+  After reviewing your configuration, click Launch.
+  You will be prompted to create or use an existing key pair for SSH access. Select or create a key pair and download it (this is crucial for SSH access).
+  Click Launch Instance.
+5. View the Instance Details
+   Once the instance is launched, go to the Instances section under EC2.
+   Locate your instance from the list.
+   In the Description tab at the bottom, you will see the Public IPv4 address of your VM. This is the IP address you will use for SSH and ping tests.
+
+(screenshot-5.png) and (screenshot-6.png )
+
+6. Note the Public IP Address
+   Write down or copy the Public IPv4 address, as this is the IP address you will need for further steps like pinging and SSH access.
+
+   in this public ip address is : 3.88.186.47 (its refferd screenshot-1.png)
+
+** next we have ping public ip of aws cloud instance **
+
+Step 1: Ensure the EC2 Instance is Running
+    Log in to your AWS Management Console.
+    Navigate to EC2 Dashboard.
+    Verify that the instance you want to ping is running and has a public IP assigned.
+Step 2: Check Security Group Rules
+    Go to the Security Group associated with your EC2 instance.
+    Ensure that ICMP (ping) traffic is allowed in the inbound rules. The rule should look something like this:
+    Type: ICMP
+    Protocol: Echo Request
+    Port Range: N/A (since it’s ICMP)
+    Source: Anywhere (0.0.0.0/0) or your IP
+    Save changes if any modifications are made.
+Step 3: Find the Public IP of the EC2 Instance
+    Go to the Instances section under EC2.
+    Find your instance and note down its Public IPv4 Address.
+Step 4: Ping the EC2 Instance from Kali Linux
+    Open a terminal in Kali Linux.
+    Use the ping command followed by the public IP of your EC2 instance
+#ping <Public-IP>
+    in this case we have a ip then we use it 
+#(ping  3.88.186.47)
+(screenshot-7)
+
+**To log in to your AWS EC2 VM via SSH using Kali Linux, follow these steps:
+
+  Prerequisites:
+  Ensure the EC2 instance is running and has a public IP.
+  Have the private key (.pem) file that was generated when you launched the EC2 instance.
+  The Security Group associated with your EC2 instance must have port 22 (SSH) open to your IP address or to the public (0.0.0.0/0).
+  Your Kali Linux must have internet access.
+Step 1: Locate Your Private Key
+  Ensure you have the .pem file that was provided when you launched the EC2 instance. This file is needed to authenticate your SSH connection.
+
+Step 2: Check EC2 Public IP Address
+  Go to your AWS Management Console.
+  In the EC2 Dashboard, click on Instances and note down the Public IPv4 Address of your instance.
+
+Replace /path/to/your-key.pem with the actual path to your .pem file.
+
+Step 3: SSH into the EC2 Instance
+  Now, use the SSH command to log in to your instance. The default username for an EC2 instance depends on the AMI (Amazon Machine Image) you used:
+
+  For Amazon Linux 2 or Amazon Linux AMI: ec2-user
+  For Ubuntu: ubuntu
+  For CentOS: centos
+  For Debian: admin or root
+  In Kali Linux, open a terminal and use the following SSH command:
+
+#(ssh -i /path/to/your-key.pem username@Public-IP)
+
+(screenshot-8.png)
+
+then Finally destroy/terminate the VM
+
+to select  instence state -> Terminate(delete)instance
+
+
