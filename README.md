@@ -36,7 +36,7 @@ chmod 400 /path/to/your-key.pem
 
 SSH into the instance using the appropriate username (e.g., ubuntu for Ubuntu):
 
-ssh -i /path/to/your-key.pem ubuntu@3.88.186.47
+ssh -i /path/to/your-key.pem user@ip address
 
 Step 6: Terminate the EC2 Instance
 Navigate to the Instances section in the EC2 Dashboard.
